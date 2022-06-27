@@ -1,0 +1,11 @@
+code/ckpt
+code/logs
+*.pkl
+*.pth.tar
+checkpoints/
+*.pyth
+*.txt
+*.log
+*.json
+*.npy
+*.ipynb

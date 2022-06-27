@@ -1,0 +1,52 @@
+TRAIN:
+  ENABLE: True
+  DATASET: Actiongenome
+  BATCH_SIZE: 16
+  EVAL_PERIOD: 3
+  CHECKPOINT_PERIOD: 5
+  AUTO_RESUME: True
+  CHECKPOINT_EPOCH_RESET: True
+  CHECKPOINT_FILE_PATH: "./ckpt/SLOWFAST_8x8_R50.pkl"
+  CHECKPOINT_TYPE: "caffe2"
+TEST:
+  ENABLE: False
+DATA:
+  NUM_FRAMES: 32
+  NUM_BOXES: 4
+  INPUT_CHANNEL_NUM: [3, 3]
+  MEAN: [0.485, 0.456, 0.406]
+  STD: [0.485, 0.456, 0.406]
+  PATH_TO_DATA_DIR: '/mnt/data0/home/lixunsong/FSL_Datasets/action_genome'
+  MULTI_LABEL: True
+SOLVER:
+  BASE_LR: 0.01
+  LR_POLICY: steps_with_relative_lrs
+  LRS: [1, 0.1, 0.1]
+  STEPS: [0, 35, 45]
+  MAX_EPOCH: 50
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.0001
+  WARMUP_EPOCHS: 0.0
+  OPTIMIZING_METHOD: sgd
+  USE_MIXED_PRECISION: True
+  SMOOTHING: 0.0
+SLOWFAST:
+  ALPHA: 8
+MODEL:
+  NUM_CLASSES: 157
+  ARCH: slowfast
+  MODEL_NAME: SlowFast
+  LOSS_FUNC: bce_logit
+  HEAD: region
+  HEAD_ACT: sigmoid
+DATA_LOADER:
+  NUM_WORKERS: 8
+  PIN_MEMORY: True
+BN:
+  USE_PRECISE_STATS: False
+  NUM_BATCHES_PRECISE: 200
+  NORM_TYPE: batchnorm
+NUM_GPUS: 1
+NUM_SHARDS: 1
+RNG_SEED: 123
+OUTPUT_DIR: ag_results/sf_global_region

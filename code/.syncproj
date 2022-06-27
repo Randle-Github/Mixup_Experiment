@@ -1,0 +1,1 @@
+rsync -auvz --delete --exclude-from=$(git rev-parse --show-toplevel)/rsync_exclude.txt --timeout=15  ~/Documents/python_work/eccv_CompAction <remote>:~/DL_Workspace/; echo -e \"\\033[31;1;4m$(date)\\033[0m\n\"
